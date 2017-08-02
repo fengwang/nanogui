@@ -11,11 +11,13 @@
     BSD-style license that can be found in the LICENSE.txt file.
 */
 
+#include <nanogui/opengl.h>
 #include <nanogui/imageview.h>
 #include <nanogui/window.h>
 #include <nanogui/screen.h>
 #include <nanogui/theme.h>
 #include <cmath>
+
 
 NAMESPACE_BEGIN(nanogui)
 
@@ -96,6 +98,28 @@ void ImageView::bindImage(GLuint imageId) {
     mImageID = imageId;
     updateImageParameters();
     fit();
+}
+
+GLuint ImageView::bindImageFromFile(NVGcontext* ctx, std::string const& path ) {
+    GLuint imageId = nvgCreateImage( ctx, path.c_str(), 0 );
+
+    if ( 0 == imageId )
+        throw std::runtime_error( "bindImageFromFile :: cannot load image file!" );
+
+    mImageID = imageId;
+    updateImageParameters();
+
+    int image_width;
+    int image_height;
+    nvgImageSize( ctx, imageId, &image_width, &image_height );
+
+    float const scale_factor_1 = float( mImageSize[0] ) / float( image_width );
+    float const scale_factor_2 = float( mImageSize[1] ) / float( image_height );
+    float const scale_factor = std::min( scale_factor_1, scale_factor_2 );
+
+    setScale( scale_factor );
+    center();
+    return imageId;
 }
 
 Vector2f ImageView::imageCoordinateAt(const Vector2f& position) const {

@@ -17,6 +17,7 @@
 #include <nanogui/widget.h>
 #include <nanogui/glutil.h>
 #include <functional>
+#include <string>
 
 NAMESPACE_BEGIN(nanogui)
 
@@ -31,6 +32,7 @@ public:
     ~ImageView();
 
     void bindImage(GLuint imageId);
+    GLuint bindImageFromFile(NVGcontext* ctx, std::string const& path);
 
     GLShader& imageShader() { return mShader; }
 

@@ -46,6 +46,7 @@ void register_misc(py::module &m) {
     py::class_<ImageView, Widget, ref<ImageView>, PyImageView>(m, "ImageView", D(ImageView))
         .def(py::init<Widget *, GLuint>(), D(ImageView, ImageView))
         .def("bindImage", &ImageView::bindImage, D(ImageView, bindImage))
+        .def("bindImageFromFile", &ImageView::bindImageFromFile, D(ImageView, bindImageFromFile))
         .def("imageShader", &ImageView::imageShader, D(ImageView, imageShader))
         .def("scaledImageSize", &ImageView::scaledImageSize, D(ImageView, scaledImageSize))
         .def("offset", &ImageView::offset, D(ImageView, offset))

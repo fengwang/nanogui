@@ -1180,6 +1180,8 @@ static const char *__doc_nanogui_ImageView_ImageView = R"doc()doc";
 
 static const char *__doc_nanogui_ImageView_bindImage = R"doc()doc";
 
+static const char *__doc_nanogui_ImageView_bindImageFromFile = R"doc()doc";
+
 static const char *__doc_nanogui_ImageView_center = R"doc(Centers the image without affecting the scaling factor.)doc";
 
 static const char *__doc_nanogui_ImageView_clampedImageCoordinateAt =
